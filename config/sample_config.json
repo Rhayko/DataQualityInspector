@@ -1,0 +1,15 @@
+{
+  "expected_types": {
+    "inspection_date": "date",
+    "units_produced": "integer",
+    "defect_rate_pct": "numeric",
+    "downtime_minutes": "numeric"
+  },
+  "outlier_columns": [
+    "units_produced",
+    "defect_rate_pct",
+    "downtime_minutes",
+    "temperature_c"
+  ]
+}
+

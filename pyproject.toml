@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "data-quality-inspector"
+version = "1.0.0"
+description = "A focused CSV data-quality profiler and report generator."
+requires-python = ">=3.10"
+dependencies = [
+  "matplotlib==3.10.6",
+  "numpy==2.3.3",
+  "pandas==2.3.2",
+]
+
+[project.scripts]
+inspect-data = "data_quality_inspector.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

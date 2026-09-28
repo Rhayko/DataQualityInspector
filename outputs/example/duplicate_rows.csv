@@ -1,0 +1,5 @@
+batch_id,inspection_date,plant,shift,product_line,inspector_id,units_produced,defect_rate_pct,downtime_minutes,temperature_c,inspection_status
+B-1016,2025-01-17,North,Day,Bravo,I-133,555,2.49,36.8,21.8,Pass
+B-1089,2025-03-31,North,Evening,Bravo,I-117,578,2.65,12.3,20.9,Pass
+B-1016,2025-01-17,North,Day,Bravo,I-133,555,2.49,36.8,21.8,Pass
+B-1089,2025-03-31,North,Evening,Bravo,I-117,578,2.65,12.3,20.9,Pass

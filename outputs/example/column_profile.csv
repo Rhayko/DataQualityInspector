@@ -1,0 +1,12 @@
+column,dtype,non_null_count,missing_count,missing_percent,unique_count,mean,median,min,max,std
+batch_id,object,182,0,0.0,180,,,,,
+inspection_date,object,182,0,0.0,180,,,,,
+plant,object,182,0,0.0,3,,,,,
+shift,object,182,0,0.0,3,,,,,
+product_line,object,182,0,0.0,3,,,,,
+inspector_id,object,178,4,2.2,5,,,,,
+units_produced,object,182,0,0.0,106,509.309,509.0,409.0,619.0,41.731
+defect_rate_pct,object,182,0,0.0,135,2.833,2.79,0.88,14.8,1.178
+downtime_minutes,object,182,0,0.0,143,17.098,15.0,1.2,138.0,13.226
+temperature_c,float64,179,3,1.65,71,22.352,22.3,18.1,35.6,1.985
+inspection_status,object,182,0,0.0,3,,,,,
