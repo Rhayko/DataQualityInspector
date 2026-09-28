@@ -1,31 +1,31 @@
 # Data Quality Inspector
 
-A focused Python tool that turns a CSV into an evidence-based data-quality review. It profiles the data, flags common risks, creates two visualizations, and produces a report that can be read directly on GitHub.
+I built Data Quality Inspector to turn a CSV into an evidence-based quality review. It profiles the data, flags common risks, creates two visualizations, and produces a report that can be read directly on GitHub.
 
 ![Example missing-values chart](outputs/example/missing_values.png)
 
-## Problem
+## Why I Built This
 
-Analysis is only as reliable as its input data. CSV files are convenient, but they do not enforce types, uniqueness, completeness, or reasonable numeric ranges. Analysts often discover these problems after calculations or dashboards have already been built.
+I know an analysis is only as reliable as its input data. CSV files are convenient, but they do not enforce types, uniqueness, completeness, or reasonable numeric ranges. Those problems are often discovered after calculations or dashboards have already been built.
 
-Data Quality Inspector moves that review to the beginning of the workflow. It does not silently “clean” questionable records. It shows what needs attention so an analyst can make a defensible decision with domain context.
+I built this project to move that review to the beginning of the workflow. I intentionally do not “clean” questionable records silently. Instead, I show what needs attention so the analyst can make a defensible decision with the right domain context.
 
-## Features
+## What It Does
 
-- Profiles row and column counts, detected types, completeness, unique values, and numeric summary statistics.
-- Reports missing-value counts and percentages by column.
-- Exports every row that belongs to a full-row duplicate group.
-- Validates configured numeric, integer, date, and boolean expectations.
-- Flags potential numeric outliers with the 1.5 × IQR rule.
-- Produces missing-value and numeric-distribution charts.
-- Writes a readable Markdown report plus reusable CSV and JSON outputs.
-- Runs from one command and has no web framework or external service dependency.
+- I profile row and column counts, detected types, completeness, unique values, and numeric summary statistics.
+- I report missing-value counts and percentages by column.
+- I export every row that belongs to a full-row duplicate group.
+- I validate configured numeric, integer, date, and boolean expectations.
+- I flag potential numeric outliers with the 1.5 × IQR rule.
+- I produce missing-value and numeric-distribution charts.
+- I write a readable Markdown report plus reusable CSV and JSON outputs.
+- I keep the tool to one command with no web framework or external service dependency.
 
-## Approach
+## How I Designed It
 
-The command-line layer accepts the input, output, and optional rule configuration paths. A small coordinator loads the CSV and calls independent profiling and validation functions. Reporting and visualization are separate, which keeps the checks easy to test and makes output formats replaceable.
+I use a command-line layer to accept the input, output, and optional rule-configuration paths. A small coordinator loads the CSV and calls independent profiling and validation functions. I keep reporting and visualization separate so each check is easier to test and the output formats can be changed without rewriting the validation logic.
 
-The optional JSON configuration makes expectations explicit without hard-coding them into the program:
+I use an optional JSON configuration to make data expectations explicit without hard-coding them into the program:
 
 ```json
 {
@@ -38,7 +38,7 @@ The optional JSON configuration makes expectations explicit without hard-coding 
 }
 ```
 
-Type failures, missing values, duplicates, and potential outliers remain separate findings. That distinction matters: a blank value is not the same problem as the word `unknown` in a numeric field, and an unusual measurement is not automatically an error.
+I keep type failures, missing values, duplicates, and potential outliers as separate findings. That distinction matters to me because a blank value is not the same problem as the word `unknown` in a numeric field, and an unusual measurement is not automatically an error.
 
 ## Project Structure
 
@@ -56,14 +56,13 @@ data-quality-inspector/
 │   ├── visualization.py        # Report charts
 │   └── reporting.py            # Markdown, CSV, and JSON output
 ├── tests/                      # Unit and end-to-end coverage
-├── INTERVIEW_GUIDE.md          # Plain-language project walkthrough
 ├── pyproject.toml
 └── requirements.txt
 ```
 
-## Example Results
+## What the Example Shows
 
-The included synthetic manufacturing file contains 182 inspection records and deliberately seeded quality problems. The generated example report found:
+I included a synthetic manufacturing file with 182 inspection records and deliberately seeded quality problems. When I ran the inspector, it found:
 
 | Finding | Result |
 | --- | ---: |
@@ -72,9 +71,9 @@ The included synthetic manufacturing file contains 182 inspection records and de
 | Invalid typed values | 4 |
 | Potential outliers | 9 |
 
-The type review identifies an impossible date, a written phrase in an integer column, and invalid text in two numeric columns. The outlier results include the calculated bounds and original CSV row numbers for investigation.
+My type review identifies an impossible date, a written phrase in an integer column, and invalid text in two numeric columns. I also include the calculated outlier bounds and original CSV row numbers so every finding can be investigated.
 
-See the complete [example report](outputs/example/data_quality_report.md), [column profile](outputs/example/column_profile.csv), and [JSON summary](outputs/example/summary.json). The sample is entirely synthetic and reproducible; details are in [data provenance](data/PROVENANCE.md).
+I committed the complete [example report](outputs/example/data_quality_report.md), [column profile](outputs/example/column_profile.csv), and [JSON summary](outputs/example/summary.json) so the results can be reviewed without running the code first. The sample is entirely synthetic and reproducible; I document its creation in [data provenance](data/PROVENANCE.md).
 
 ## How to Run
 
@@ -116,7 +115,7 @@ Run the automated checks from the repository root:
 python -m unittest discover -s tests -v
 ```
 
-The suite covers missingness and summary statistics, complete duplicate-group detection, numeric/integer/date type checks, unsupported configuration, IQR outliers and CSV row numbers, empty input behavior, and an end-to-end report build. The committed example output was generated with the same public command shown above.
+I test missingness and summary statistics, complete duplicate-group detection, numeric/integer/date type checks, unsupported configuration, IQR outliers and CSV row numbers, empty input behavior, and a complete report build. I generated the committed example output with the same public command shown above.
 
 To reproduce the synthetic source file before regenerating the report:
 
@@ -124,10 +123,10 @@ To reproduce the synthetic source file before regenerating the report:
 python scripts/generate_sample_data.py
 ```
 
-## Limitations
+## Current Limitations
 
-- Duplicate detection currently compares complete rows; business-key duplicates require a configurable key rule.
-- CSV type expectations are configured manually because the format carries no reliable schema.
-- IQR flags are statistical review prompts, not proof that a value is wrong.
-- The tool reads a file into memory and is intended for analyst-sized datasets, not distributed processing.
-- It does not modify or impute data; remediation should be a separate, documented decision.
+- I currently compare complete rows for duplicates; business-key duplicates would require a configurable key rule.
+- I configure CSV type expectations manually because the format carries no reliable schema.
+- I treat IQR flags as statistical review prompts, not proof that a value is wrong.
+- I read the file into memory, so this version is intended for analyst-sized datasets rather than distributed processing.
+- I do not modify or impute data because remediation should be a separate, documented decision.
