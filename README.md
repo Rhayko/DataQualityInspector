@@ -131,6 +131,3 @@ python scripts/generate_sample_data.py
 - IQR flags are statistical review prompts, not proof that a value is wrong.
 - The tool reads a file into memory and is intended for analyst-sized datasets, not distributed processing.
 - It does not modify or impute data; remediation should be a separate, documented decision.
-
-For a plain-language code walkthrough and interview talking points, see [INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md).
-

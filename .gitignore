@@ -7,7 +7,7 @@ venv/
 build/
 dist/
 *.egg-info/
+INTERVIEW_GUIDE.md
 outputs/*
 !outputs/example/
 !outputs/example/**
-
